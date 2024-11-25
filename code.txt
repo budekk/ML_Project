@@ -1,0 +1,62 @@
+var polandRegions = ee.FeatureCollection('FAO/GAUL/2015/level2')
+  .filter(ee.Filter.eq('ADM1_NAME', 'Zachodnio-Pomorskie'));
+
+Map.centerObject(polandRegions, 8); 
+Map.addLayer(polandRegions, {color: 'blue'}, 'Zachodnio-Pomorskie');
+
+var analysisYear = 2024;
+var startDate = ee.Date.fromYMD(analysisYear, 5, 1);
+var endDate = ee.Date.fromYMD(analysisYear, 10, 31);
+
+var landsatCollection = ee.ImageCollection("LANDSAT/LC09/C02/T1_TOA")
+  .filterBounds(polandRegions.geometry())
+  .filterDate(startDate, endDate)
+  .sort("CLOUD_COVER", true)
+  .limit(20);
+
+var medianImage = landsatCollection.median();
+var landsatImage = medianImage.clip(polandRegions.geometry());
+var rgbImage = landsatImage.select(['B4', 'B3', 'B2']);
+var cloudMask = landsatImage.eq(61440).reduce(ee.Reducer.anyNonZero());
+var mask = cloudMask.not();
+var rgbMasked = rgbImage.updateMask(mask);
+var rgbAdjusted = rgbMasked.multiply(1).multiply(1); 
+
+Map.addLayer(rgbAdjusted, { min: 0, max: 0.3 }, 'Adjusted RGB Image');
+
+var bands = ['B2', 'B3', 'B4', 'B5', 'B6', 'B7'];
+var trainingPoints = ee.FeatureCollection([
+  ee.Feature(Agricultural, { class: 2 }),  
+  ee.Feature(BareSoil, { class: 1 }),     
+  ee.Feature(Forests, { class: 3 }),       
+  ee.Feature(Water, { class: 0 }),         
+  ee.Feature(LowDensityHousing, { class: 4 }), 
+  ee.Feature(HighDensityHousing, { class: 5 })  
+]);
+
+var training = landsatImage.select(bands).sampleRegions({
+  collection: trainingPoints,
+  properties: ['class'],
+  scale: 30
+});
+
+var classifier = ee.Classifier.smileRandomForest(10).train({
+  features: training,
+  classProperty: 'class',
+  inputProperties: bands
+});
+
+var classified = landsatImage.select(bands).classify(classifier);
+
+var landcoverPalette = ['blue', 'brown', 'green', 'darkgreen', 'yellow', 'orange'];
+Map.addLayer(classified, { min: 0, max: 5, palette: landcoverPalette }, 'Klasyfikacja pokrycia terenu');
+
+Export.image.toDrive({
+  image: classified,
+  description: 'LandcoverClassification_Zachodniopomorskie',
+  scale: 30,
+  region: polandRegions.geometry(),
+  fileFormat: 'GeoTIFF',
+  maxPixels: 1e9
+});
+
