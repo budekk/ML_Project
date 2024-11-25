@@ -15,6 +15,8 @@ The project relied on Landsat 8 (LC08) satellite data available in Google Earth 
 
 The data were clipped to the region of the West Pomeranian Voivodeship, which was loaded as an administrative boundary (FeatureCollection from FAO/GAUL).
 
+![image](img2.png)
+
 # Data Preparation
 
 The first step in the project was to load the boundaries of the West Pomeranian Voivodeship into Google Earth Engine and display them on the map. Next, the analysis period (2024) was defined, and start and end dates were set for the image collection. Landsat 8 images were downloaded, and the cloud cover was assessed, ensuring that the most suitable images were chosen for analysis.
@@ -32,6 +34,8 @@ To perform the classification, training polygons were created for the land cover
 - **Water** (class 0)
 - **Low-Density Housing** (class 4)
 - **High-Density Housing** (class 5)
+
+![image](img4.png)
 
 These polygons were used to prepare the training data, which would be used to train the classifier.
 
