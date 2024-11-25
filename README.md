@@ -1,7 +1,7 @@
 ---
 title: "Automated Land Cover Classification in Google Earth Engine"
-author: "Your Name"
-date: "`r Sys.Date()`"
+authors: "Aleksandra Barnach and Bartosz Budek"
+date: "25.11.2024"
 output: github_document
 ---
 
@@ -42,6 +42,8 @@ Using the prepared training dataset and selected bands from the Landsat images (
 # Visualization of Results
 
 After classification, the results were visualized on the map using an appropriate color palette to represent the different land cover classes. Each class was assigned a unique color to facilitate the interpretation of the classification results.
+
+![image](img1.png)
 
 # Exporting Results
 
