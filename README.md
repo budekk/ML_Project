@@ -37,6 +37,7 @@ To perform the classification, training polygons were created for the land cover
 - **Low-Density Housing** (class 4)
 - **High-Density Housing** (class 5)
 
+![image](img5.png)
 ![image](img4.png)
 
 These polygons were used to prepare the training data, which would be used to train the classifier.
