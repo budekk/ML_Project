@@ -2,7 +2,7 @@
 title: "Automated Land Cover Classification in Google Earth Engine"
 authors: "Aleksandra Barnach and Bartosz Budek"
 date: "25.11.2024"
-output: github_document
+output: github_document 
 ---
 
 # Project Goal
