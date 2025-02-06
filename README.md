@@ -61,6 +61,6 @@ Once the classification was complete, the results were exported as a GeoTIFF ima
 
 # Conclusion
 
-This project used Google Earth Engine to perform a land cover classification of the West Pomeranian Voivodeship using Landsat 8 satellite data. The Random Forest algorithm was successfully applied to distinguish different land cover classes, which can be useful in spatial planning, environmental monitoring, and land management.
+This project was done using Google Earth Engine to perform a land cover classification of the West Pomeranian Voivodeship using Landsat 8 satellite data. The Random Forest algorithm was successfully applied to distinguish different land cover classes, which can be useful in spatial planning, environmental monitoring, and land management.
 
 Future work could improve the classification process by using a larger number of training points, applying different classification algorithms, and incorporating additional satellite data (e.g., Sentinel-2).
