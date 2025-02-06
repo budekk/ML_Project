@@ -7,7 +7,7 @@ output: github_document
 
 # Project Goal
 
-The goal of the project was to conduct a land cover analysis for the West Pomeranian Voivodeship (Zachodniopomorskie) in Poland using Landsat 8 satellite data. The analysis applied image classification techniques with the Random Forest algorithm, utilizing training polygons to assign appropriate land cover classes to image pixels.
+The goal of the project was to conduct a land cover analysis for the West Pomeranian Voivodeship (Zachodniopomorskie) in Poland using Landsat 8 satellite data. The analysis applied image classification techniques with the Random Forest algorithm, utilizing training polygons to assign appropriate land cover classes to image pixels.  
 
 ![image](img3.png)
 
@@ -15,7 +15,7 @@ The goal of the project was to conduct a land cover analysis for the West Pomera
 
 The project relied on Landsat 8 (LC08) satellite data available in Google Earth Engine, specifically using Top of Atmosphere (TOA) imagery from the period between May 1 and October 31, 2024. The imagery was selected to minimize cloud cover by sorting the images based on cloud percentage, and the 20 images with the least cloud cover were selected.
 
-The data were clipped to the region of the West Pomeranian Voivodeship, which was loaded as an administrative boundary (FeatureCollection from FAO/GAUL).
+The data were clipped to the region of the West Pomeranian Voivodeship, which was loaded as an administrative boundary (FeatureCollection from FAO/GAUL).  
 
 ![image](img2.png)
 
